@@ -1,9 +1,32 @@
 class Opt:
-    pass
+    SIZE = WIDTH,HEIGHT = 800,700
+    class Token:
+        SIZE = 100
+        RADIUS = 40
+    class Colors:
+        PLAYER = RGB.YELLOW
+        COMPUTER = RGB.RED
+        EMPTY = RGB.WHITE
+        DECORATION = RGB.DARKBLUE
+        BACKGROUND = RGB.GREY
+        KEY = RGB.BLACK
+    class Font:
+        NAME = "arial"
+        COLOR = RGB.BLACK
+        SIZE = 18
 
-class Color:
-    pass
-    
+class RGB:
+    BLACK = (0,0,0)
+    WHITE = (255,255,255)
+    RED = (255,0,0)
+    GREEN = (0,255,0)
+    BLUE = (0,80,255)
+    DARKBLUE = (10,10,200)
+    YELLOW = (255,255,0)
+    PURPLE = (255,0,255)
+    LIGHTBLUE = (0,255,255)
+    GREY = (100,100,100)
+
 class Refr:
     PLAYER = 1
     COMPUTER = 2
