@@ -2,7 +2,7 @@
 from src.match import Game
 
 def main(argv):
-    g = Game():
+    g = Game()
     g.play(1)
 
 if __name__ == "__main__":
