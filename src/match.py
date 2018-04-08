@@ -1,4 +1,4 @@
-PLAYER, COMPUTER = 1,2
+from setting import Refr
 
 class Game:
     def __init__(self):
@@ -10,9 +10,9 @@ class Game:
     def play(self, starter):
         self.turn = starter
         while not self.win:
-            if self.turn = PLAYER:
+            if self.turn = Refr.PLAYER:
                 pass
-            elif self.turn == COMPUTER:
+            elif self.turn == Refr.COMPUTER:
                 pass
 
             self.change_turn()
