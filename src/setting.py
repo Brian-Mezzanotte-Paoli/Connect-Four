@@ -9,7 +9,7 @@ class RGB:
     PURPLE = (255,0,255)
     LIGHTBLUE = (0,255,255)
     GREY = (100,100,100)
-    
+
 class Opt:
     SIZE = WIDTH,HEIGHT = 800,700
     class Token:
@@ -31,3 +31,5 @@ class Opt:
 class Refr:
     PLAYER = 1
     COMPUTER = 2
+    QUIT = -1
+    ERROR = -2

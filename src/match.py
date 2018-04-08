@@ -16,9 +16,10 @@ class Game:
         while not self.win and self.running:
             if self.turn == Refr.PLAYER:
                 choice = self.grill.get_position()
-                if choice == -1:
-                    self.running = False
+
             elif self.turn == Refr.COMPUTER:
                 choice = randint(1,7)
             print(choice,self.turn)
             self.change_turn()
+            if choice == Refr.QUIT:
+                self.running = False
