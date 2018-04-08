@@ -1,20 +1,24 @@
 from setting import Refr
 from draw import Grill
+from random import randint
 
 class Game:
     def __init__(self):
         self.win = False
         self.grill = Grill()
+        self.running = True
 
     def change_turn(self):
         self.turn = 3-self.turn
 
     def play(self, starter):
         self.turn = starter
-        while not self.win:
+        while not self.win and self.running:
             if self.turn == Refr.PLAYER:
-                pass
+                choice = self.grill.get_position()
+                if choice == -1:
+                    self.running = False
             elif self.turn == Refr.COMPUTER:
-                pass
-
+                choice = randint(1,7)
+            print(choice,self.turn)
             self.change_turn()
