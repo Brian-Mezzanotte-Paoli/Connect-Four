@@ -11,15 +11,23 @@ class RGB:
     GREY = (100,100,100)
 
 class Opt:
-    SIZE = WIDTH,HEIGHT = 800,700
+    class Window:
+        WIDTH = 760
+        HEIGHT = 660
+        SIZE = WIDTH, HEIGHT
+        MARGIN = 20
+        NX = 7
+        NY = 6
+        RECT = (MARGIN,MARGIN,WIDTH-MARGIN*2,HEIGHT-MARGIN*2)
     class Token:
-        SIZE = 100
+        SIZE = (Window.WIDTH - 2*Window.MARGIN) / NX
         RADIUS = 40
     class Colors:
         PLAYER = RGB.YELLOW
         COMPUTER = RGB.RED
         EMPTY = RGB.WHITE
         DECORATION = RGB.DARKBLUE
+        GRILL = RGB.BLUE
         BACKGROUND = RGB.GREY
         KEY = RGB.BLACK
     class Font:
