@@ -5,4 +5,4 @@ class IA:
         pass
 
     def get_choice(self):
-        return randint(1,7)
+        return randint(0,6)

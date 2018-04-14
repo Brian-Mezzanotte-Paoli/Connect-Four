@@ -23,8 +23,7 @@ class Game:
                 choice = self.grill.get_position()
             elif self.turn == Refr.COMPUTER:
                 choice = self.strategy.get_choice()
-            print(choice,self.turn)
-            y = self.matrix.add(self.turn,choice-1)
+            y = self.matrix.add(self.turn,choice)
             self.grill.token(self.turn,choice,y)
             self.change_turn()
             if choice == Refr.QUIT:
