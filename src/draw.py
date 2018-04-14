@@ -6,6 +6,8 @@ def draw_rect(surface, rect, color, thickness=0):
     pygame.draw.rect(surface, color, rect, thickness)
 def draw_circle(surface, pos, radius, color, thickness=0):
     pygame.draw.circle(surface, color, pos, radius, thickness)
+def draw_token(surface, pos, color):
+    draw_circle(surface,pos,Opt.Token.RADIUS,color)
 
 class Grill:
     def __init__(self):
@@ -32,9 +34,7 @@ class Grill:
             for x in range(Opt.Window.NX):
                 center = (x*Opt.Token.SIZE + Opt.Window.MARGIN + Opt.Token.SIZE/2,
                         y*Opt.Token.SIZE + Opt.Window.MARGIN + Opt.Token.SIZE/2)
-                draw_circle(self.upper_screen,center,Opt.Token.RADIUS,Opt.Colors.KEY)
-
-
+                draw_token(self.upper_screen,center,Opt.Colors.KEY)
 
     def get_position(self):
         key = None

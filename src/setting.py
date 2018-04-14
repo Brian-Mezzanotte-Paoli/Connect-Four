@@ -12,15 +12,15 @@ class RGB:
 
 class Opt:
     class Window:
-        WIDTH = 760
-        HEIGHT = 660
+        WIDTH = 740
+        HEIGHT = 640
         SIZE = WIDTH, HEIGHT
         MARGIN = 20
         NX = 7
         NY = 6
         RECT = (MARGIN,MARGIN,WIDTH-MARGIN*2,HEIGHT-MARGIN*2)
     class Token:
-        SIZE = (Window.WIDTH - 2*Window.MARGIN) / NX
+        SIZE = 100
         RADIUS = 40
     class Colors:
         PLAYER = RGB.YELLOW
