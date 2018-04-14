@@ -1,14 +1,12 @@
 class Matrix:
-	def __init__(self):
+	def __init__(self,logger):
 		self.m = list()
+		self.logger = logger
 		for y in range(6):
 			n = []
 			for x in range(7):
 				n+=[0]
 			self.m+=[n]
-
-	def reset(self):
-		self.__init__()
 
 	def add(self, value, x):
 		for y in range(6):
@@ -18,6 +16,7 @@ class Matrix:
 				return y
 
 	def control_victory(self):
+		self.logger.info("control_victory")
 		s=[]
 		#Columns
 		for y in range(7):
@@ -52,5 +51,7 @@ class Matrix:
 			for x in range(len(p)-1):
 				if p[x] == p[x+1] and not p[x]==0: c+=1
 				else: c=0
-				if c==3: return True
+				if c==3:
+					self.logger.warning("victory found")
+					return True
 		return False
