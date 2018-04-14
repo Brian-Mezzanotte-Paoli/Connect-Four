@@ -22,6 +22,7 @@ class Opt:
     class Token:
         SIZE = 100
         RADIUS = 40
+        SPEED = 10
     class Colors:
         PLAYER = RGB.YELLOW
         COMPUTER = RGB.RED

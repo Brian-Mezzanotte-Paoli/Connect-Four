@@ -20,6 +20,7 @@ class Game:
             elif self.turn == Refr.COMPUTER:
                 choice = randint(1,7)
             print(choice,self.turn)
+            self.grill.token(self.turn,choice,5)
             self.change_turn()
             if choice == Refr.QUIT:
                 self.running = False

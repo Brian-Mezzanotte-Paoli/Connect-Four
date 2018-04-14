@@ -19,6 +19,7 @@ class Grill:
         self.mount_upper()
         self.screen.blit(self.under_screen, (0,0))
         self.screen.blit(self.upper_screen, (0,0))
+        self.tokens = pygame.sprite.Group()
         pygame.display.flip()
 
     def mount_under(self):
@@ -46,8 +47,32 @@ class Grill:
                     return Refr.QUIT
         return key
 
-class Tokens:
-    pass
+    def token(self, turn, x, y):
+        token = Token(turn,x,y)
+        self.tokens.add(token)
+        while token.rect.y < token.desty:
+            now = pygame.time.get_ticks()
+            if now - token.last_move > token.speed:
+                token.rect.y += 10
+                self.screen.fill(Opt.Colors.BACKGROUND)
+                self.screen.blit(self.under_screen,(0,0))
+                self.tokens.draw(self.screen)
+                self.screen.blit(self.upper_screen,(0,0))
+                self.last_move = now
+                pygame.display.flip()
 
-class Token:
-    pass
+
+class Token(pygame.sprite.Sprite):
+    def __init__(self,turn,x,y):
+        pygame.sprite.Sprite.__init__(self)
+        if turn == Refr.PLAYER: self.color = Opt.Colors.PLAYER
+        elif turn == Refr.COMPUTER: self.color = Opt.Colors.COMPUTER
+        self.desty = y * Opt.Token.SIZE + Opt.Window.MARGIN
+        self.image = pygame.Surface((Opt.Token.SIZE,Opt.Token.SIZE))
+        draw_token(self.image,(Opt.Token.SIZE/2,Opt.Token.SIZE/2),self.color)
+        self.image.set_colorkey(Opt.Colors.KEY)
+        self.rect = self.image.get_rect()
+        self.rect.x = x * Opt.Token.SIZE + Opt.Window.MARGIN
+        self.rect.y = -Opt.Token.SIZE
+        self.speed = Opt.Token.SPEED
+        self.last_move = 0
