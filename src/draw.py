@@ -10,8 +10,10 @@ def draw_token(surface, pos, color):
     draw_circle(surface,pos,Opt.Token.RADIUS,color)
 
 class Grill:
-    def __init__(self):
+    def __init__(self,logger):
         pygame.init()
+        self.logger = logger
+        self.logger.debug("Grill init started")
         self.font_name = pygame.font.match_font(Opt.Font.NAME)
         self.screen = pygame.display.set_mode(Opt.Window.SIZE)
         self.screen.fill(Opt.Colors.BACKGROUND)
@@ -21,6 +23,7 @@ class Grill:
         self.screen.blit(self.upper_screen, (0,0))
         self.tokens = pygame.sprite.Group()
         pygame.display.flip()
+        self.logger.debug("Grill init completed")
 
     def mount_under(self):
         self.under_screen = pygame.Surface(Opt.Window.SIZE)

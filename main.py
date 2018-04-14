@@ -1,8 +1,10 @@
 
 from src.match import Game
+from logger import Logger
 
 def main(argv):
-    g = Game()
+    logger = Logger()
+    g = Game(logger)
     g.play(1)
 
 if __name__ == "__main__":
