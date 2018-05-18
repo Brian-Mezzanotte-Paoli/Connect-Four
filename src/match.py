@@ -13,19 +13,28 @@ class Game:
     def change_turn(self):
         self.turn = 3-self.turn
 
+    def get_choice(self):
+        if self.turn == Refr.PLAYER:
+            self.choice = self.grill.get_position()
+        elif self.turn == Refr.COMPUTER:
+            self.choice = self.strategy.get_choice()
+
+    def state(self):
+        if self.choice == Refr.QUIT:
+            self.running = False
+        if self.matrix.control_victory():
+            self.win = True
+
+    def turn(self):
+        self.matrix.show()
+        self.get_choice()
+        y = self.matrix.add(self.turn,self.choice)
+        self.grill.token(self.turn,self.choice,y)
+        self.change_turn()
+        self.state()
+
     def play(self, starter):
         self.turn = starter
         while not self.win and self.running:
-            self.matrix.show()
-            if self.turn == Refr.PLAYER:
-                choice = self.grill.get_position()
-            elif self.turn == Refr.COMPUTER:
-                choice = self.strategy.get_choice()
-            y = self.matrix.add(self.turn,choice)
-            self.grill.token(self.turn,choice,y)
-            self.change_turn()
-            if choice == Refr.QUIT:
-                self.running = False
-            if self.matrix.control_victory():
-                self.win = True
+            self.turn()
         return self.turn
