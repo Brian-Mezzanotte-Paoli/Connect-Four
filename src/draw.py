@@ -1,4 +1,4 @@
-from setting import Opt, Refr
+from src.setting import Opt, Refr
 import pygame
 
 
@@ -10,10 +10,8 @@ def draw_token(surface, pos, color):
     draw_circle(surface,pos,Opt.Token.RADIUS,color)
 
 class Grill:
-    def __init__(self,logger):
+    def __init__(self):
         pygame.init()
-        self.logger = logger
-        self.logger.debug("Grill init started")
         self.font_name = pygame.font.match_font(Opt.Font.NAME)
         self.screen = pygame.display.set_mode(Opt.Window.SIZE)
         self.screen.fill(Opt.Colors.BACKGROUND)
@@ -23,7 +21,6 @@ class Grill:
         self.screen.blit(self.upper_screen, (0,0))
         self.tokens = pygame.sprite.Group()
         pygame.display.flip()
-        self.logger.debug("Grill init completed")
 
     def mount_under(self):
         self.under_screen = pygame.Surface(Opt.Window.SIZE)
@@ -36,8 +33,8 @@ class Grill:
         draw_rect(self.upper_screen,Opt.Window.RECT, Opt.Colors.GRILL)
         for y in range(Opt.Window.NY):
             for x in range(Opt.Window.NX):
-                center = (x*Opt.Token.SIZE + Opt.Window.MARGIN + Opt.Token.SIZE/2,
-                        y*Opt.Token.SIZE + Opt.Window.MARGIN + Opt.Token.SIZE/2)
+                center = (int(x*Opt.Token.SIZE + Opt.Window.MARGIN + Opt.Token.SIZE/2),
+                        int(y*Opt.Token.SIZE + Opt.Window.MARGIN + Opt.Token.SIZE/2))
                 draw_token(self.upper_screen,center,Opt.Colors.KEY)
 
     def get_position(self):
@@ -72,10 +69,10 @@ class Token(pygame.sprite.Sprite):
         elif turn == Refr.COMPUTER: self.color = Opt.Colors.COMPUTER
         self.desty = y * Opt.Token.SIZE + Opt.Window.MARGIN
         self.image = pygame.Surface((Opt.Token.SIZE,Opt.Token.SIZE))
-        draw_token(self.image,(Opt.Token.SIZE/2,Opt.Token.SIZE/2),self.color)
+        draw_token(self.image,(Opt.Token.SIZE//2,Opt.Token.SIZE//2),self.color)
         self.image.set_colorkey(Opt.Colors.KEY)
         self.rect = self.image.get_rect()
-        self.rect.x = x * Opt.Token.SIZE + Opt.Window.MARGIN
+        self.rect.x = int(x * Opt.Token.SIZE + Opt.Window.MARGIN)
         self.rect.y = -Opt.Token.SIZE
         self.speed = Opt.Token.SPEED
         self.last_move = 0

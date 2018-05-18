@@ -1,16 +1,14 @@
-from setting import Refr
-from draw import Grill
-from matrix import Matrix
-from strategy import IA
+from src.setting import Refr
+from src.draw import Grill
+from src.matrix import Matrix
+from src.strategy import IA
 class Game:
-    def __init__(self,logger):
-        self.logger = logger
+    def __init__(self,):
         self.win = False
         self.running = True
-        self.grill = Grill(logger)
-        self.matrix = Matrix(logger)
+        self.grill = Grill()
+        self.matrix = Matrix()
         self.strategy = IA()
-        self.logger.start()
 
     def change_turn(self):
         self.turn = 3-self.turn
@@ -18,7 +16,6 @@ class Game:
     def play(self, starter):
         self.turn = starter
         while not self.win and self.running:
-            self.logger.debug("new round: turn player " + str(self.turn))
             if self.turn == Refr.PLAYER:
                 choice = self.grill.get_position()
             elif self.turn == Refr.COMPUTER:
@@ -30,4 +27,3 @@ class Game:
                 self.running = False
             if self.matrix.control_victory():
                 self.win = True
-        self.logger.quit()
