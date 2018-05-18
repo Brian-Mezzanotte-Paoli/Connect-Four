@@ -8,7 +8,7 @@ class Game:
         self.running = True
         self.grill = Grill()
         self.matrix = Matrix()
-        self.strategy = IA()
+        self.strategy = IA(self.matrix)
 
     def change_turn(self):
         self.turn = 3-self.turn
@@ -16,6 +16,7 @@ class Game:
     def play(self, starter):
         self.turn = starter
         while not self.win and self.running:
+            self.matrix.show()
             if self.turn == Refr.PLAYER:
                 choice = self.grill.get_position()
             elif self.turn == Refr.COMPUTER:
@@ -27,3 +28,4 @@ class Game:
                 self.running = False
             if self.matrix.control_victory():
                 self.win = True
+        return self.turn
