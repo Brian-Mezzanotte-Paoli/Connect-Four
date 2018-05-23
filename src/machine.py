@@ -6,8 +6,8 @@ TIME_CHECK = 1 	#Tempo di attesa per normali servomotori
 TIME_COMB = 7.5 #Tempo di attera per il pettine
 
 class Commands:
-	OPEN_PORT_PLAYER = 7		#Apertura sportello giocatore
-	CLOSE_PORT_PLAYER = 17		#Chiusura sportello giocatore
+	OPEN_DOOR_PLAYER = 7		#Apertura sportello giocatore
+	CLOSE_DOOR_PLAYER = 17		#Chiusura sportello giocatore
 	OPEN_DOORS_UP = [0,1,2,3,4,5,6]				#Apertura delle porte in alto
 	CLOSE_DOORS_UP = [10,11,12,13,14,15,16]		#Chiusura delle porte in alto
 	OPEN_DOORS_DOWN = [20,21,22,23,24,25,26]		#Apertura delle porte in basso
@@ -71,26 +71,32 @@ class Machine:
     	self.elev_down()
 
     def wait_player(self):
-    	self.run(Commands.OPEN_PORT_PLAYER)
+    	self.run(Commands.OPEN_DOOR_PLAYER)
     	self.ser.flushInput(); self.ser.flushOutput()
-    	time.sleep(1)
+    	sleep(1)
+        self.run(Commands.CONTROL)
     	self.ser.flushInput(); self.ser.flushOutput()
     	while True:
-    		rest = self.ser.readline().strip()
-    		if int(rest)-100 in range(7):
-    			break
-    	self.run(close_port_player)
-    	return rest
+            rest = self.ser.readline().strip()
+            v = int(rest)-100
+            if v in range(7): break
+    	self.run(Commands.CLOSE_DOOR_PLAYER)
+    	return v
 
     def switch(self,n):
     	if n: self.run(Commands.SWITCH_PLAYER)
     	else: self.run(Commands.SWITCH_ELEN)
 
-    def open_ports_liste(self, liste):
+    def open_ports_lists(self, liste):
     	for nLista in range(6):
-    		self.open_ports_lista(liste[5-nLista])
+    		self.open_ports_list(liste[5-nLista])
 
-    def open_ports_lista(self,lista):
+    def reset(self):
+        self.run(Commands.CLOSE_DOOR_PLAYER)
+        for p in range(1,7):
+            self.run("1"+str(p))
+
+    def open_ports_list(self,lista):
     	self.scroll_comb()		#Apre e chiude il pettine
     	self.switch(1)			#Gira l'uscita delle palline verso il giocatore
     	for pos in range(7):				#Lascia cadere le palline che devono finire dal giocatore

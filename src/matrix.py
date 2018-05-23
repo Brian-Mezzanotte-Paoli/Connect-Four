@@ -7,6 +7,10 @@ class Matrix:
 				n.append(int())
 			self.m.append(n)
 
+	def show():
+		for y in self.m:
+			print(y)
+
 	def add(self, value, x):
 		for y in range(6):
 			y = 5-y
@@ -41,7 +45,7 @@ class Matrix:
 
 	def control_victory(self):
 		self.solve_s()
-		for p in s:
+		for p in self.s:
 			c = int()
 			for x in range(len(p)-1):
 				if p[x] == p[x+1] and not p[x] == int(): c+=1

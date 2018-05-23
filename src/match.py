@@ -4,10 +4,14 @@ from src.matrix import Matrix
 from src.strategy import IA
 from src.machine import Machine
 
+from time import sleep
+
 class Game:
     def __init__(self):
         self.win = False
         self.running = True
+        self.emule = False
+        self.c = True
         self.grill = Grill()
         self.matrix = Matrix()
         self.machine = Machine()
@@ -18,15 +22,18 @@ class Game:
 
     def get_choice(self):
         if self.turn == Refr.PLAYER:
-            self.choice = self.grill.get_position()
+            if self.emule:
+                self.choice = self.grill.get_position()
+            else:
+                self.choice = self.machine.wait_player()
         elif self.turn == Refr.COMPUTER:
             self.choice = self.strategy.get_choice()
 
     def state(self):
         if self.choice == Refr.QUIT:
             self.running = False
-        if self.matrix.control_victory():
-            self.win = True
+        #if self.matrix.control_victory():
+        #    self.win = True
 
     def go_turn(self):
         self.matrix.show()
@@ -39,5 +46,8 @@ class Game:
     def run(self, starter):
         self.turn = starter
         while not self.win and self.running:
-            self.go_turn()
+            if self.c:
+                self.go_turn()
+            else:
+                sleep(0.1)
         return self.turn
