@@ -2,12 +2,15 @@ from src.setting import Refr
 from src.draw import Grill
 from src.matrix import Matrix
 from src.strategy import IA
+from src.machine import Machine
+
 class Game:
-    def __init__(self,):
+    def __init__(self):
         self.win = False
         self.running = True
         self.grill = Grill()
         self.matrix = Matrix()
+        self.machine = Machine()
         self.strategy = IA(self.matrix)
 
     def change_turn(self):
@@ -25,7 +28,7 @@ class Game:
         if self.matrix.control_victory():
             self.win = True
 
-    def turn(self):
+    def go_turn(self):
         self.matrix.show()
         self.get_choice()
         y = self.matrix.add(self.turn,self.choice)
@@ -33,8 +36,8 @@ class Game:
         self.change_turn()
         self.state()
 
-    def play(self, starter):
+    def run(self, starter):
         self.turn = starter
         while not self.win and self.running:
-            self.turn()
+            self.go_turn()
         return self.turn
