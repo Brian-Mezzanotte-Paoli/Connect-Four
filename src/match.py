@@ -7,10 +7,10 @@ from src.machine import Machine
 from time import sleep
 
 class Game:
-    def __init__(self):
+    def __init__(self, emule, mode):
         self.win = False
         self.running = True
-        self.emule = False
+        self.emule = emule
         self.c = True
         self.grill = Grill()
         self.matrix = Matrix()

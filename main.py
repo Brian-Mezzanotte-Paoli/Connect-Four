@@ -4,11 +4,18 @@ from src.match import Game
 from cli import Cli
 
 
+
 def main(argv):
-    g = Game()
+
+    _, mode, starter, emule = argv
+
+    emule = bool(int(emule))    # '0' -> 0 -> False
+                                # '1' -> 1 -> True
+    starter = int(starter)
+    g = Game(emule,mode)
     c = Cli(g)
 
-    game = Thread(target=g.run, args=(1,))
+    game = Thread(target=g.run, args=(starter,))
     cli = Thread(target=c.run)
 
     game.start()
