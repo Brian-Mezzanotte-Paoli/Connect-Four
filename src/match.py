@@ -14,7 +14,8 @@ class Game:
         self.c = True
         self.grill = Grill()
         self.matrix = Matrix()
-        self.machine = Machine()
+        if not self.emule:
+            self.machine = Machine()
         self.strategy = IA(self.matrix)
 
     def change_turn(self):
