@@ -19,7 +19,7 @@ class Game:
         self.strategy = IA(self.matrix)
 
     def change_turn(self):
-        self.turn = 3-self.turn
+        self.turn = 3 - self.turn
 
     def get_choice(self):
         if self.turn == Refr.PLAYER:
@@ -39,8 +39,8 @@ class Game:
     def go_turn(self):
         self.matrix.show()
         self.get_choice()
-        y = self.matrix.add(self.turn,self.choice)
-        self.grill.token(self.turn,self.choice,y)
+        y = self.matrix.add(self.turn, self.choice)
+        self.grill.token(self.turn, self.choice,y)
         self.change_turn()
         self.state()
 
